@@ -1,0 +1,42 @@
+server:
+  servlet:
+    context-path: /userservice
+
+spring:
+  application:
+    name: userservice
+  data:
+    rest:
+      max-page-size: 3000
+      default-page-size: 500
+   
+  profiles:
+    active: "dev"
+  
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=User_DB
+    username: sa
+    password: Password@123
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+        maximum-pool-size: 5
+        auto-commit: false
+  jpa:
+   hibernate:
+      ddl-auto: validate
+   properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        synonyms: true
+        show-sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+
+server:
+    port: 8080            
+ 
+   
+
